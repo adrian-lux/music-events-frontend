@@ -6,7 +6,7 @@ export default function Footer(){
     return <footer className={styles.footer}>
         <p>Copyright &copy; DJ Events 2022</p>
         <p>
-            <Link href="about">About</Link>
+            <Link href="/about">About</Link>
         </p>
     </footer>
 
