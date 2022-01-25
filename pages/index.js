@@ -11,7 +11,7 @@ export default function HomePage({events}){
 
     {events.length === 0 && <h2>No events available</h2>}
     {events.map(evt => (
-              <EventItem key={evt.id} event={evt}></EventItem>
+              <EventItem key={evt.id} evt={evt}></EventItem>
               )
     )}
   </div>

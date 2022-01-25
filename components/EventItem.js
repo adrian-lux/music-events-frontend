@@ -1,24 +1,30 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 import styles from '@/styles/EventItem.module.css'
 
+export default function EventItem({ evt }) {
+  return (
+    <div className={styles.event}>
+      <div className={styles.img}>
+        <Image
+          src={evt.image ? evt.image : '/images/event-default.png'}
+          width={170}
+          height={100}
+        />
+      </div>
 
-export default function EventItem({event}){
-    return (<div className={styles.event}>
+      <div className={styles.info}>
+        <span>
+          {evt.date} at {evt.time}
+        </span>
+        <h3>{evt.name}</h3>
+      </div>
 
-         <div className={styles.image}>
-            <Image width={170} height={100} alt="event image" src={event.image ? event.image : '/images/event-default.png'}/>
-        </div>
-
-        <div className={styles.info}>
-            <span>{event.date + " " + event.time}</span>
-            <h3>{event.name}</h3>
-        </div>
-
-        <div className={styles.link}>
-            <Link href={`/events/${event.slug}`}>Take me there</Link>
-        </div>
-
+      <div className={styles.link}>
+        <Link href={`/events/${evt.slug}`}>
+          <a className='btn'>Details</a>
+        </Link>
+      </div>
     </div>
-    )
+  )
 }
