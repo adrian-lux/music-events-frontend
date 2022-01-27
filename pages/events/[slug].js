@@ -30,7 +30,7 @@ return (<Layout>
     </span>
     <h1>{evt.name}</h1>
     <div className={styles.image}>
-    <Image
+    <Image alt='event image'
           src={evt.image ? evt.image : '/images/event-default.png'}
           width={1020}
           height={600}

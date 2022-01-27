@@ -6,22 +6,23 @@ export default function EventItem({ evt }) {
   return (
     <div className={styles.event}>
       <div className={styles.img}>
-        <Image
-          src={evt.image ? evt.image : '/images/event-default.png'}
+        <Image alt='event image'
+          src={evt.attributes.image ? evt.attributes.image.data.attributes.formats.thumbnail.url : '/images/event-default.png'}
           width={170}
           height={100}
         />
       </div>
+     
 
       <div className={styles.info}>
         <span>
-          {evt.date} at {evt.time}
+          {new Date(evt.attributes.date).toLocaleDateString()} at {evt.attributes.time}
         </span>
-        <h3>{evt.name}</h3>
+        <h3>{evt.attributes.name}</h3>
       </div>
 
       <div className={styles.link}>
-        <Link href={`/events/${evt.slug}`}>
+        <Link href={`/events/${evt.attributes.id}`}>
           <a className='btn'>Details</a>
         </Link>
       </div>

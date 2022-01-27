@@ -20,8 +20,12 @@ export default function HomePage({events}){
 }
 
 export async function getServerSideProps(){
-  const res = await fetch(`${API_URL}/api/events`);
-  const events = await res.json();
+  const res = await fetch(`${API_URL}/api/events?populate=*&sort=date:ASC&pagination[pageSize]=3`);
+ 
+  const { data } = await res.json();
+  const events = await data;
+
+  console.log(events);
 
   return {
     props: {events}
