@@ -33,7 +33,7 @@ return (<Layout>
     <h1>{evt.name}</h1>
     <div className={styles.image}>
     <Image alt='event image'
-          src={evt.image ? evt.image : '/images/event-default.png'}
+          src={evt.image ? evt.image.data.attributes.formats.large.url : '/images/event-default.png'}
           width={1020}
           height={600}
         />
@@ -77,7 +77,7 @@ export async function getStaticProps({params:{slug}}){
     const res = await fetch(`${API_URL}/api/events/?populate=*&filters[slug][$eq]=${slug}`);
     const evt = await res.json(); 
 
-    console.log(evt.data[0].attributes)
+    console.log(evt.data[0].attributes.image.data.attributes.formats)
     return {
       props: {
           evt: evt.data[0].attributes}
