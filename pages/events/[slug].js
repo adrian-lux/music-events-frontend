@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaPencilAlt,FaTimes } from 'react-icons/fa';
 
+
+
 export default function EventDetailPage({evt}){
 
     const deleteEvent = function (){
@@ -59,9 +61,10 @@ return (<Layout>
 export async function getStaticPaths(){
     const res = await fetch(`${API_URL}/api/events`);
     const events = await res.json(); 
+
     let paths = [];
-    events.forEach(evt => {
-        paths.push({params: {slug: evt.slug}});
+    events.data.forEach(evt => {
+        paths.push({params: {slug: evt.attributes.slug}});
     });
     return {
         paths: paths,
@@ -70,11 +73,14 @@ export async function getStaticPaths(){
 }
 
 export async function getStaticProps({params:{slug}}){
-    const res = await fetch(`${API_URL}/api/events/${slug}`);
+
+    const res = await fetch(`${API_URL}/api/events/?populate=*&filters[slug][$eq]=${slug}`);
     const evt = await res.json(); 
+
+    console.log(evt.data[0].attributes)
     return {
       props: {
-          evt: evt[0]}
+          evt: evt.data[0].attributes}
     }
   }
 
