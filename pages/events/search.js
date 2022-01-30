@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Layout from '@/components/layout'
 import { API_URL } from '@/config/server';
 import EventItem from '@/components/EventItem';
+import qs from 'qs';
 
-export default function HomePage({events}){
+export default function SearchPage({events}){
   console.log(events)
   return <Layout>
   <div>
@@ -19,7 +20,12 @@ export default function HomePage({events}){
 
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps({query:{term}}){
+
+  const query = qs.stringify({
+      
+  });
+
   const res = await fetch(`${API_URL}/api/events?populate=*&sort=date:ASC&pagination[pageSize]=3`);
  
   const { data } = await res.json();
@@ -28,7 +34,6 @@ export async function getStaticProps(){
   console.log(events);
 
   return {
-    props: {events},
-    revalidate: 1
+    props: {events}
   }
 }
