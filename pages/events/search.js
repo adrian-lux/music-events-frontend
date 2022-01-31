@@ -23,10 +23,44 @@ export default function SearchPage({events}){
 export async function getServerSideProps({query:{term}}){
 
   const query = qs.stringify({
-      
+    sort: ['date:asc'],
+    filters: {
+      $or: [
+        {
+          name: {
+            $eq: term,
+          },
+        },
+        {
+          performers: {
+            $containsi: term,
+          },
+        },
+        {
+          description: {
+            $containsi: term,
+          },
+        },
+        {
+          venue: {
+            $containsi: term,
+          },
+        },
+        {
+          address: {
+            $containsi: term,
+          },
+        },
+      ],
+    },
+    populate: '*',   
+    pagination: {
+      pageSize: 3,
+      page: 1,
+    },
   });
 
-  const res = await fetch(`${API_URL}/api/events?populate=*&sort=date:ASC&pagination[pageSize]=3`);
+  const res = await fetch(`${API_URL}/api/events?${query}`);
  
   const { data } = await res.json();
   const events = await data;
