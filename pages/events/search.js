@@ -3,12 +3,16 @@ import Layout from '@/components/layout'
 import { API_URL } from '@/config/server';
 import EventItem from '@/components/EventItem';
 import qs from 'qs';
+import { useRouter } from 'next/router';
 
 export default function SearchPage({events}){
-  console.log(events)
-  return <Layout>
+    const router = useRouter();
+
+  return <Layout title='Search Results'>
   <div>
-    <h1>HomePage</h1>
+  <Link href='/'><a> Go Back</a></Link>
+
+    <h1>Search result for {router.query.term}</h1>
 
     {events.length === 0 && <h2>No events available</h2>}
     {events.map(evt => (
