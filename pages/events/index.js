@@ -4,7 +4,6 @@ import { API_URL } from '@/config/server';
 import EventItem from '@/components/EventItem';
 
 export default function HomePage({events}){
-  console.log(events)
   return <Layout>
   <div>
     <h1>HomePage</h1>

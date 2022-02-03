@@ -77,7 +77,6 @@ export async function getStaticProps({params:{slug}}){
     const res = await fetch(`${API_URL}/api/events/?populate=*&filters[slug][$eq]=${slug}`);
     const evt = await res.json(); 
 
-    console.log(evt.data[0].attributes.image.data.attributes.formats)
     return {
       props: {
           evt: evt.data[0].attributes}
