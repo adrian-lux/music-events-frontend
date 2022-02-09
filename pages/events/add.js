@@ -36,12 +36,12 @@ const router = useRouter();
             toast.error("Please fill in all Fields");
         }
         else{
-            const res = await fetch(`${API_URL}/events`, {
+            const res = await fetch(`${API_URL}/api/events`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify({"data": values})
             });
     
             if (!res.ok) {
