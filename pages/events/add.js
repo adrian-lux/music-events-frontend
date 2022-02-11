@@ -8,8 +8,6 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 export default function AddEventPage(){
 
 const [values,setValues] = useState({
