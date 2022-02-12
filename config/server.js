@@ -1,1 +1,1 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.3.2:1337'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:1337' //'http://192.168.3.2:1337'

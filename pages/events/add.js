@@ -5,6 +5,10 @@ import { API_URL } from '@/config/server';
 import styles from '@/styles/Form.module.css';
 import Link from 'next/link';
 
+const slugify = require('slugify')
+
+
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,6 +21,7 @@ const [values,setValues] = useState({
     address:'',
     date:'',
     time:'',
+    slug: '',
     description:'',
 });
 
@@ -26,6 +31,8 @@ const router = useRouter();
         e.preventDefault();
         console.log("submit");
 
+        values.slug = slugify(values.name);
+
         const hasEmptyFields = Object.values(values).some((value) => {
             return value == '';
         });
@@ -34,6 +41,9 @@ const router = useRouter();
             toast.error("Please fill in all Fields");
         }
         else{
+
+            
+
             const res = await fetch(`${API_URL}/api/events`, {
                 method: "POST",
                 headers: {
@@ -58,7 +68,7 @@ const router = useRouter();
 const handleInputChange = (e) => {
     const {name,value} = e.target
     values[e.target.id] = e.target.value;
-    setValues({...values, [name]: value});
+        setValues({...values, [name]: value});
 }
 
 return <Layout title="Add an event">
@@ -93,7 +103,7 @@ return <Layout title="Add an event">
 
         <div>
             <label htmlFor='time'>Start Time</label>    
-            <input type="time" placeholder='Start Time' id='time' name='time' value={values.time} onChange={handleInputChange}/>
+            <input type="text" placeholder='18:00' id='time' name='time' value={values.time} onChange={handleInputChange}/>
         </div>
 
 
