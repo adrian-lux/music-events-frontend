@@ -33,7 +33,7 @@ return (<Layout>
     <h1>{evt.name}</h1>
     <div className={styles.image}>
     <Image alt='event image'
-          src={evt.image ? evt.image.data.attributes.formats.large.url : '/images/event-default.png'}
+          src={evt.image.data ? evt.image.data.attributes.formats.large.url : '/images/event-default.png'}
           width={1020}
           height={600}
         />
