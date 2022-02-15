@@ -4,14 +4,36 @@ import styles from '@/styles/Event.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaPencilAlt,FaTimes } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 
 
-export default function EventDetailPage({evt}){
+export default function EventDetailPage({id,evt}){
 
-    const deleteEvent = function (){
+    const router = useRouter();
 
+    const deleteEvent = async (e) => {
+        if(confirm("Are you sure?")){
+            console.log(id);
+
+
+
+            const res = await fetch(`${API_URL}/api/events/${id}`,{method: 'DELETE'});
+        
+            const data = await res.json();
+            console.log(data.error);
+            if (!res.ok) {
+                toast.error("Sth went wrong.");
+                console.log(res);
+    
+            } else {
+                router.push("/events");
+            }
+        }
     }
+
 return (<Layout>
     <div className={styles.event}>
     
@@ -22,7 +44,7 @@ return (<Layout>
             </a>
         </Link>
 
-        <a className={styles.delete} onClick={deleteEvent()}>
+        <a className={styles.delete} onClick={deleteEvent}>
             <FaTimes/> Delete Event
         </a>
     </div>
@@ -31,6 +53,7 @@ return (<Layout>
         {`${evt.date} ${evt.time}`}
     </span>
     <h1>{evt.name}</h1>
+    <ToastContainer />
     <div className={styles.image}>
     <Image alt='event image'
           src={evt.image.data ? evt.image.data.attributes.formats.large.url : '/images/event-default.png'}
@@ -79,6 +102,7 @@ export async function getStaticProps({params:{slug}}){
 
     return {
       props: {
+          id:evt.data[0].id,
           evt: evt.data[0].attributes
         },
         revalidate: 120
