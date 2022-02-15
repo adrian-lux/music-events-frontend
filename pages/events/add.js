@@ -11,6 +11,7 @@ const slugify = require('slugify')
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { route } from 'next/dist/server/router';
 
 export default function AddEventPage(){
 
@@ -31,7 +32,7 @@ const router = useRouter();
         e.preventDefault();
         console.log("submit");
 
-        values.slug = slugify(values.name);
+        values.slug = slugify(values.name,{lower:true});
 
         const hasEmptyFields = Object.values(values).some((value) => {
             return value == '';
@@ -57,7 +58,10 @@ const router = useRouter();
                 console.log(res);
     
             } else {
-                const data = await res.json;
+                const {data} = await res.json();
+
+                console.log(data.attributes.slug);
+                await router.push(`/events/${data.attributes.slug}`);
             }
         }
 

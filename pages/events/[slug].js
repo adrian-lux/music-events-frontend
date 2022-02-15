@@ -79,9 +79,11 @@ export async function getStaticProps({params:{slug}}){
 
     return {
       props: {
-          evt: evt.data[0].attributes}
+          evt: evt.data[0].attributes
+        },
+        revalidate: 120
     }
-  }
+}
 
 // export async function getServerSideProps({query: {slug}}){
 //     const res = await fetch(`${API_URL}/api/events/${slug}`);
