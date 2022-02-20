@@ -38,7 +38,7 @@ return (<Layout>
     <div className={styles.event}>
     
     <div className={styles.controls}>
-        <Link href={`events/edit/${evt.id}`}>
+        <Link href={`edit/${id}`}>
             <a>
                 <FaPencilAlt /> Edit Event
             </a>
