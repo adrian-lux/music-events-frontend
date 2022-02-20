@@ -38,7 +38,7 @@ return (<Layout>
     <div className={styles.event}>
     
     <div className={styles.controls}>
-        <Link href={`events/edit/${evt.id}`}>
+        <Link href={`edit/${id}`}>
             <a>
                 <FaPencilAlt /> Edit Event
             </a>
@@ -69,7 +69,7 @@ return (<Layout>
     <p>
         {evt.description}
     </p>
-    <h3>Venue:{evt.venue}</h3>
+    <h3>Venue: {evt.venue}</h3>
     <p>{evt.address}</p>
     </div>
 
