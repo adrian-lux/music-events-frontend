@@ -69,7 +69,7 @@ return (<Layout>
     <p>
         {evt.description}
     </p>
-    <h3>Venue:{evt.venue}</h3>
+    <h3>Venue: {evt.venue}</h3>
     <p>{evt.address}</p>
     </div>
 
