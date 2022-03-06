@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout';
+import Modal from '@/components/Modal';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { API_URL } from '@/config/server';
@@ -31,6 +32,8 @@ const [values,setValues] = useState({
 });
 
 const [imagePreview,setImagePreview] = useState(evt.image ? evt.image.data.attributes.formats.thumbnail.url : null)
+
+const [showModal,setShowModal] = useState(false);
 
 const router = useRouter();
 
@@ -135,6 +138,9 @@ return <Layout title="Add an event">
     <div><button className="btn-secondary">
         <FaImage /> Set Image
         </button></div>
+        <Modal show={showModal} onClose={()=> setShowModal(false)} title={'upload image'}>
+            Image Upload
+        </Modal>
 </Layout>
 }
 
