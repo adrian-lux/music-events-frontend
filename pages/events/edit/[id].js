@@ -135,10 +135,10 @@ return <Layout title="Add an event">
     <h2>Event Image</h2>
     {imagePreview ? <Image width={170} height={100} alt="event image" src={imagePreview} />: <div>No image uploaded</div>}
 
-    <div><button className="btn-secondary">
+    <div><button className="btn-secondary" onClick={() => setShowModal(true)}>
         <FaImage /> Set Image
         </button></div>
-        <Modal show={showModal} onClose={()=> setShowModal(false)} title={'upload image'}>
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
             Image Upload
         </Modal>
 </Layout>

@@ -1,16 +1,20 @@
 import styles from '@/styles/Modal.module.css'
 import { useEffect,useState } from 'react'
-import { ReactDOM } from 'react'
+import {createPortal} from 'react-dom';
 import { FaTimes } from 'react-icons/fa'
 
-export default function Modal(show,onClose,children,title){
+export default function Modal({ show, onClose, children, title }){
 const [isBrowser,setIsBrowser] = useState(false);
 
 useEffect(() => setIsBrowser(true));
 
-const handleClose = (e) => { 
-    e.preventDefault();
-    onClose}
+const handleClose = (e) => {
+    e.preventDefault()
+    onClose()
+    show = false;
+  }
+
+    console.log(show)
 
 const modelContent = show ? (<div className={styles.overlay}>
         <div className={styles.modal}>
@@ -19,7 +23,7 @@ const modelContent = show ? (<div className={styles.overlay}>
                     <FaTimes />
                 </a>
             </div>
-            { title && <div>{title}</div> }
+            { <div>Upload Image</div> }
             <div className={styles.body}>
                 {children}
             </div>
@@ -28,7 +32,8 @@ const modelContent = show ? (<div className={styles.overlay}>
     : null
 
     if(isBrowser){
-        return ReactDOM.createPortal(modelContent,document.getElementById('modal-root'))
+        //return null
+        return createPortal(modelContent,document.getElementById('modal-root'))
     } else{
         return null
     }
