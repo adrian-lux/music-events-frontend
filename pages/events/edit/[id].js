@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import Modal from '@/components/Modal';
+import ImageUpload from '@/components/ImageUpload';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { API_URL } from '@/config/server';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import Image from 'next/image';
 import { FaImage } from 'react-icons/fa';
+
 
 const slugify = require('slugify')
 
@@ -34,6 +36,11 @@ const [values,setValues] = useState({
 const [imagePreview,setImagePreview] = useState(evt.image ? evt.image.data.attributes.formats.thumbnail.url : null)
 
 const [showModal,setShowModal] = useState(false);
+
+const imageUploaded = async (e) => {
+    const res = await fetch(`${API_URL}/events/${id}`)
+    console.log("upload")
+}
 
 const router = useRouter();
 
@@ -139,7 +146,7 @@ return <Layout title="Add an event">
         <FaImage /> Set Image
         </button></div>
         <Modal show={showModal} onClose={() => setShowModal(false)}>
-            Image Upload
+        <ImageUpload evtId={id} imageUploaded={imageUploaded} ></ImageUpload>
         </Modal>
 </Layout>
 }
