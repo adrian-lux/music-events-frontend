@@ -33,13 +33,14 @@ const [values,setValues] = useState({
     description: evt.description,
 });
 
-const [imagePreview,setImagePreview] = useState(evt.image ? evt.image.data.attributes.formats.thumbnail.url : null)
+const [imagePreview,setImagePreview] = useState(evt.image.data ? evt.image.data.attributes.formats.thumbnail.url : null)
 
 const [showModal,setShowModal] = useState(false);
 
 const imageUploaded = async (e) => {
     const res = await fetch(`${API_URL}/events/${id}`)
-    console.log("upload")
+    const data = await res.json();
+    console.log(data)
 }
 
 const router = useRouter();
