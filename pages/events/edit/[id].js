@@ -38,9 +38,15 @@ const [imagePreview,setImagePreview] = useState(evt.image.data ? evt.image.data.
 const [showModal,setShowModal] = useState(false);
 
 const imageUploaded = async (e) => {
-    const res = await fetch(`${API_URL}/events/${id}`)
-    const data = await res.json();
-    console.log(data)
+    const res = await fetch(`${API_URL}/api/events/?populate=*&filters[id][$eq]=${id}`);
+    const data = await res.json(); 
+    setShowModal(false);
+    if(evt.image.data){
+        setImagePreview(data.data[0].attributes.image.data.attributes.formats.thumbnail.url)
+    }
+
+    
+   // console.log(data)
 }
 
 const router = useRouter();
