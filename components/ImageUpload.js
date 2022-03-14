@@ -14,8 +14,8 @@ export default function ImageUpload ({evtId,imageUploaded}){
         const formData = new FormData();
        // console.log(e.target.files[0])
        formData.append('files',image)
-       formData.append('rev','events')
-       formData.append('revId',evtId)
+       formData.append('ref','event')
+       formData.append('refId',evtId)
        formData.append('field','image')
 
         const res = await fetch(`${API_URL}/api/upload`,{
@@ -23,23 +23,8 @@ export default function ImageUpload ({evtId,imageUploaded}){
             body: formData
         });
 
-        if(res.ok){
-            console.log();
-            const image_uploaded = await res.json()
-            console.log(image_uploaded[0])
-            let image_data = {
-                data: {
-                    image: image_uploaded[0]
-                }
-            }
-
-            //console.log(JSON.stringify(image_data))
-            const res1 = await fetch(`${API_URL}/api/events/${evtId}`,{
-                method: "PUT",
-                body: JSON.stringify(image_uploaded)
-            });
-
-            console.log(await res1.json())
+         if(res.ok){
+     
 
             imageUploaded()
         }
