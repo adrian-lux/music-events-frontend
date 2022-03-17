@@ -24,8 +24,6 @@ export default function ImageUpload ({evtId,imageUploaded}){
         });
 
          if(res.ok){
-     
-
             imageUploaded()
         }
     }
