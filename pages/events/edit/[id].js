@@ -40,8 +40,9 @@ const [showModal,setShowModal] = useState(false);
 const imageUploaded = async (e) => {
     const res = await fetch(`${API_URL}/api/events/?populate=*&filters[id][$eq]=${id}`);
     const data = await res.json(); 
+    console.log(data.data[0]);
     setShowModal(false);
-    if(evt.image.data){
+    if(data.data[0].attributes.image.data){
         setImagePreview(data.data[0].attributes.image.data.attributes.formats.thumbnail.url)
     }
 
