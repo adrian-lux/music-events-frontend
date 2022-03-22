@@ -12,7 +12,6 @@ export default function EventItem({ evt }) {
           height={100}
         />
       </div>
-     
 
       <div className={styles.info}>
         <span>
